@@ -1,0 +1,121 @@
+課題２−３
+
+
+
+２−３−１
+wgetで保管先directoryを指示する方法
+
+　$ wget -O (フォルダのパス)/(ファイル名) (URL）
+　$ wget -O wget/rt-polaritydata.tar.gz http://www.cs.cornell.edu/people/pabo/movie-review-data/rt-polaritydata.tar.gz
+
+
+
+２−３−３
+tar.gzの圧縮、解凍
+
+　圧縮
+　　tar -zcvf xxxx.tar.gz directory
+　解凍
+　　tar -zxvf xxxx.tar.gz
+
+　例) tar -zxvf rt-polaritydata.tar.gz
+
+
+
+２−３−２
+データのDirectory間移動
+
+　$ mv [オプション] 移動元 移動先
+
+　例)　mv rt-polaritydata.README.1.0.txt ~/review_polarity/
+
+
+
+２−３−４
+データ、ファイルの検索
+
+　$ find (検索先のフォルダ) (ファイル名)
+　
+　例)　find ~/test_1 rt-polaritydata
+ 
+テクストファイルの文字数や行数を数える   
+  wc -c  バイト数の表示
+　wc -l  行数の表示
+　wc -w  単語数の表示
+
+
+
+２−３−５
+ファイルやDirectoryの権限確認方法と変更方法
+　
+　$ chmod (所有者の権限)(グループの権限)(その他の権限) (ファイル名)
+
+　0     ---     権限なし
+  1     --x     実行できるよ
+  2     -w-     書き込みできるよ
+  3     -wx     書込・実行できるよ
+  4     r--     読み込みできるよ
+  5     r-x　　 読込・実行できるよ
+  6     rw- 　　読込・書込みできるよ
+  7     rwx 　　読込・書込・実行できるよ
+
+  例)　ファイルを書き込み禁止にした場合
+
+　$ chmod 444 rt-polaritydata.README.1.0.txt
+
+
+
+２−３−６
+　メッセージやテキストファイルを1画面ずつ表示する
+
+　$ less (ファイル名)
+　
+　例) $ less memo.txt
+
+
+
+
+２−３−７
+　ファイルのコピー
+　
+　$ cp (コピー元ファイルのパス/ファイル名) (コピー先パス)
+　
+　例) cp -r ~/review_polarity/rt-polaritydata/rt-polarity.neg  ~/kadai2021/trial/ 
+
+
+
+
+２−３−８
+　ファイル中の特定文字を含む行数をカウント
+　
+  $ grep -rc (特定の文字列) (ファイルのパス)
+　
+　例)grep -rc the  /home/daiki/review_polarity/rt-polaritydata/rt-polarity.neg
+
+
+
+
+２−３−９
+　ファイル中の特定の文字列の置き換え
+
+　$ tr (文字列１) (文字列２) < (ファイル名)
+
+　例)　$ tr "a" "2" < rt-polarity.neg
+
+
+
+
+２−３−１０
+
+　ファイル中の文章を単語で分割　
+　$ cat rt-polarity.neg | perl -pe 's/ /\n/g' > negative_word.txt
+
+　ファイル中の頻出単語をカウント
+  $ uniq -c negative_word.txt negative_word_counted.txt
+
+  ファイル中で単語の出現回数順にソート
+　$ sort -r negative_word_counted.txt >  negative_word_sorted.txt
+
+  ファイルの先頭10行を出力
+　$ head negative_word_resorted.txt > result.txt
+
